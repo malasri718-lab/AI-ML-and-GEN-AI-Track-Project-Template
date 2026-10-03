@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EduGenie</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>EduGenie</h1>
+
+    <p class="subtitle">
+        Google Gemini Learning AI
+    </p>
+
+    <label for="task">Select Task:</label>
+
+    <select id="task">
+        <option value="explain">Explain</option>
+        <option value="qa">Q&A</option>
+        <option value="quiz">Quiz</option>
+        <option value="summary">Summary</option>
+        <option value="learning_path">Learning Path</option>
+    </select>
+
+    <label for="question">Enter your question:</label>
+
+    <textarea
+        id="question"
+        placeholder="Enter your question here..."
+    ></textarea>
+
+    <button onclick="generateResponse()">
+        Generate
+    </button>
+
+    <div class="result">
+
+        <label>Result:</label>
+
+        <div id="output">
+            Gemini response will appear here...
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+async function generateResponse() {
+
+    const task = document.getElementById("task").value;
+    const question = document.getElementById("question").value;
+    const output = document.getElementById("output");
+
+    if (question.trim() === "") {
+        output.innerText = "Please enter a question.";
+        return;
+    }
+
+    output.innerText = "Generating response...";
+
+    try {
+
+        let response;
+
+        if (task === "quiz") {
+
+            response = await fetch("/quiz", {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    topic: question
+                })
+            });
+
+        } else {
+
+            response = await fetch("/generate", {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    task: task,
+                    question: question
+                })
+            });
+        }
+
+        const data = await response.json();
+
+        if (task === "quiz") {
+
+            output.innerHTML = "";
+
+            data.questions.forEach((q, index) => {
+
+                const questionDiv = document.createElement("div");
+
+                questionDiv.innerHTML = `
+                    <h3>Question ${index + 1}</h3>
+                    <p>${q.question}</p>
+
+                    <p>A. ${q.options.A}</p>
+                    <p>B. ${q.options.B}</p>
+                    <p>C. ${q.options.C}</p>
+                    <p>D. ${q.options.D}</p>
+                `;
+
+                output.appendChild(questionDiv);
+            });
+
+        } else {
+
+            output.innerText =
+                data.response || data.answer || JSON.stringify(data);
+        }
+
+    } catch (error) {
+
+        output.innerText =
+            "Error connecting to EduGenie backend.";
+
+    }
+}
+</script>
+
+</body>
+</html>

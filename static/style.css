@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #222;
+}
+
+.container {
+    width: 100%;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+select,
+textarea {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+select {
+    margin-bottom: 20px;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+    margin-bottom: 15px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: 12px 30px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 6px;
+    background-color: #4f46e5;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3730a3;
+}
+
+.result {
+    width: 100%;
+    max-width: 100%;
+}
+
+#output {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100px;
+    box-sizing: border-box;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    line-height: 1.6;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+
+    .container {
+        width: 94%;
+        padding: 20px;
+        margin: 25px auto;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+
+    .container {
+        width: 94%;
+        padding: 15px;
+        margin: 20px auto;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    select,
+    textarea,
+    button {
+        font-size: 15px;
+    }
+
+    textarea {
+        min-height: 120px;
+    }
+
+    #output {
+        padding: 12px;
+        font-size: 14px;
+    }
+}
